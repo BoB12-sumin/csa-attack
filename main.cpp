@@ -96,7 +96,7 @@ void beacon_process(struct dot11 *header, struct pcap_pkthdr *pcap_header, macpa
             break;
         }
 
-        if (tag_idx > 25)
+        if (tag_idx > 0x25)
         {
             size_t data_after_tagged_ptr = length - (tagged_ptr - reinterpret_cast<uint8_t *>(header)) - tag_len - 2; // -2 for tag_idx and tag_len
 
