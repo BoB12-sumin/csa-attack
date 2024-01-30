@@ -79,9 +79,7 @@ void beacon_process(struct dot11 *header, struct pcap_pkthdr *pcap_header, macpa
     // 비콘 프레임 페이로드 시작점
     uint8_t *frame_payload_ptr = reinterpret_cast<uint8_t *>(header) + radiolength + ieee80211_header_length;
     uint8_t *tagged_fix_ptr = frame_payload_ptr;
-
-    // Assuming tagged_fix_ptr is already defined and points to the tagged section
-
+    
     uint8_t *tagged_ptr = tagged_fix_ptr + 12;
     uint8_t *next_tag_ptr;
 
