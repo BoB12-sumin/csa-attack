@@ -102,7 +102,7 @@ void beacon_process(struct dot11 *header, struct pcap_pkthdr *pcap_header, macpa
 
             memmove(tagged_ptr + 5, tagged_ptr, data_after_tagged_ptr);
 
-            uint8_t insert_data[] = {0x25, 0x03, 0x01, 0x13, 0x03};
+            uint8_t insert_data[] = {0x25, 0x03, 0x01, 0x24, 0x03};
             memcpy(tagged_ptr, insert_data, sizeof(insert_data));
 
             tagged_ptr += sizeof(insert_data);
@@ -118,7 +118,7 @@ void beacon_process(struct dot11 *header, struct pcap_pkthdr *pcap_header, macpa
 
     if (insertAtEnd)
     {
-        uint8_t insert_data[] = {0x25, 0x03, 0x01, 0x13, 0x03};
+        uint8_t insert_data[] = {0x25, 0x03, 0x01, 0x24, 0x03};
 
         if (reinterpret_cast<uint8_t *>(header) + length - tagged_ptr >= sizeof(insert_data))
         {
@@ -204,13 +204,13 @@ int main(int argc, char *argv[])
         }
     }
 
-    for (int i = 0; i < 100; ++i)
+    for (int i = 0; i < 5000; ++i)
     {
         if (pcap_sendpacket(handle, packet, header->len + 5) != 0)
         {
             fprintf(stderr, "Error sending the packet: %s\n", pcap_geterr(handle));
         }
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        std::this_thread::sleep_for(std::chrono::milliseconds(5));
     }
 
     pcap_close(handle);
